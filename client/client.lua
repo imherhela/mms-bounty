@@ -8,25 +8,21 @@ local getbounty = 0
 local MissionActive = false
 local dist = nil
 local CreatedOutlaws = {}
-
+local BountyCooldown = false
+local BountyCooldownTimer = 0
 local SheriffMission = false
-
 local HeistActive = false
 local spawnedtresor = false
 local CreatedCops = {}
-
 local deg1 = math.random(1,360)
 local deg2 = math.random(1,360)
 local deg3 = math.random(1,360)
-
 local GroupBlip = nil
 local GroupMissionActive = false
-
 local playerjob = nil
 local MyName = nil
 local getsheriffbounty = 0
 local PoliceHeistBlipCreated = false
-
 local ChooseGroupMember = false
 local PickedUsers = {}
 
@@ -592,9 +588,19 @@ AddEventHandler('mms-bounty:client:bountylist',function(eintraege)
             }
         }, function()
             if Config.UseGroupSystem then
-                TriggerEvent('mms-bounty:client:startbountyGroup',id,difficulty,name,reward)
+                if not BountyCooldown then
+                    TriggerEvent('mms-bounty:client:StartCooldown')
+                    TriggerEvent('mms-bounty:client:startbountyGroup',id,difficulty,name,reward)
+                else
+                    VORPcore.NotifyRightTip(_U('BountyInCooldown') .. BountyCooldownTimer / 60000 .. _U('Minutes'),5000)
+                end
             else
-                TriggerEvent('mms-bounty:client:startbounty',id,difficulty,name,reward)
+                if not BountyCooldown then
+                    TriggerEvent('mms-bounty:client:StartCooldown')
+                    TriggerEvent('mms-bounty:client:startbounty',id,difficulty,name,reward)
+                else
+                    VORPcore.NotifyRightTip(_U('BountyInCooldown') .. BountyCooldownTimer / 60000 .. _U('Minutes'),5000)
+                end
             end
         end)
     end
@@ -634,6 +640,19 @@ AddEventHandler('mms-bounty:client:bountylist',function(eintraege)
     })
 
     BountyBoardPage2:RouteTo()
+end)
+
+RegisterNetEvent('mms-bounty:client:StartCooldown')
+AddEventHandler('mms-bounty:client:StartCooldown',function()
+    BountyCooldownTimer = Config.BountyCooldown * 60000
+    BountyCooldown = true
+    while BountyCooldown do
+        BountyCooldownTimer = BountyCooldownTimer - 30000
+        Citizen.Wait(30000)
+        if BountyCooldownTimer <= 0 then
+            BountyCooldown = false
+        end
+    end
 end)
 
 RegisterNetEvent('mms-bounty:client:sheriffbountylist')

@@ -74,6 +74,7 @@
 - Added Config.Debug Turn Off on Live Servers.
 - 1.3.1 fixed menu error
 - 1.3.2 Fixed tresor bug
+- 1.3.3 Added Bounty Cooldown
 
 # installation 
 

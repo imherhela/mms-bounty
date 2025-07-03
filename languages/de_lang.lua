@@ -63,10 +63,12 @@ Locales["de_lang"] = {
     HeistInCooldown = 'Es ist bereits ein Raub im Gange Versuche es Später nochmal.',
     CanDoBountyAgain = 'Du kannst nun Wieder Aufträge machen.',
     AbortedBountyNeedToWaitSec = 'Du hast vor kurzem einen Auftrag Abgebrochen Warte Bitte: Sekunden ',
-    -- New
     ChooseGroupMember = 'Gruppenmitglieder Auswählen',
     StartGoupBounty = 'Starte die Bounty als Gruppe.',
     AlreadyHasGroupMission = 'Es Läuft bereits eine Mission an der du Teilnimmst.',
     JoinedBountyGroupFrom = 'Bounty mit Gruppe gestartet. Gruppen Anführer: ',
     BountyAbortedByLeader = 'Bounty Gruppe von Anführer aufgelöst.',
+    -- NEW
+    BountyInCooldown = 'Abklingzeit. Bitte warte ',
+    Minutes = ' Minuten.',
 }

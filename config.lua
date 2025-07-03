@@ -1,5 +1,6 @@
 Config = {}
 Config.Debug = false
+
 --------------- WEBHOOK
 
 Config.WebHook = true
@@ -11,6 +12,10 @@ Config.WHName = 'BountyBoard:' -- name
 Config.WHLogo = '' -- must be 30x30px
 Config.WHFooterLogo = '' -- must be 30x30px
 Config.WHAvatar = '' -- must be 30x30px
+
+---- Coooooooldown Settings.
+
+Config.BountyCooldown = 15 -- Time in Min
 
 ----- mms-Battlepass Settings
 
